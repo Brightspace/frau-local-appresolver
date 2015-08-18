@@ -55,6 +55,13 @@ var target = appResolver.getUrl();
   - `hostname` - The hostname (or IP) to listen on. By default, `localhost` is used.  You should not need to change this.
   - `configFile` - The name of the app config file.  By default, `appconfig.json` is used.  You should not need to change this.
 
+## Contributing
+Contributions are welcome, please submit a pull request!
+
+### Code Style
+
+This repository is configured with [EditorConfig](http://editorconfig.org) rules and
+contributions should make use of them.
 
 [npm-url]: https://www.npmjs.org/package/frau-local-appresolver
 [npm-image]: https://img.shields.io/npm/v/frau-local-appresolver.svg
