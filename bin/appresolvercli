@@ -22,10 +22,15 @@ var opts = {
 	port : argv.port
 };
 
-appResolver = appResolver('urn:d2l:fra:class:copycat', opts);
+appResolver = appResolver(argv.appclass, opts);
 
 appResolver.host();
 
+console.log(chalk.green('Hosting...\n'));
+
 console.log(
-	chalk.green('Hosting local app: ' + appResolver.getConfigUrl() + '\n')
+	chalk.grey( 
+		'   app-class: ' + argv.appclass + '\n' +
+		'   app-config: ' + appResolver.getConfigUrl() + '\n'
+	)
 );
