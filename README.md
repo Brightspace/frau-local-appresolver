@@ -33,7 +33,7 @@ See below for parameter explanation.
 ```javascript
 var appResolver = require('frau-local-appresolver');
 
-// simply provide requrie appClass
+// simply provide required appClass
 appResolver = appResolver(appClass);
 
 // alternatively override default options
