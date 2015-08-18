@@ -19,8 +19,10 @@ npm install frau-local-appresolver
 ### From CLI
 
 ```javascript
+// simply provide the required appclass
 localappresolver -c urn:d2l:fra:class:some-app
 
+// alternatively override default options
 localappresolver -c urn:d2l:fra:class:some-app -f appconfig.json -h acme.com -p 3000 -d dist
 ```
 
