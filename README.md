@@ -1,0 +1,1 @@
+# frau-local-app-resolver
