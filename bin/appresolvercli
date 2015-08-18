@@ -1,0 +1,31 @@
+#! /usr/bin/env node
+
+var chalk = require('chalk'),
+	argv = require('yargs');
+
+argv = argv.usage('Usage: localappresolver --appclass|-c [--configfile|-f] [--hostname|-h] [--port|-p] [--dist|-d]')
+	.example('localappresolver -c urn:d2l:fra:class:some-app -f appconfig.json -h acme.com -p 3000 -d dist')
+	.demand('appclass')
+	.alias('c', 'appclass')
+	.alias('f', 'configfile')
+	.alias('h', 'hostname')
+	.alias('p', 'port')
+	.alias('d', 'dist')
+	.argv;
+
+var appResolver = require('../lib/appresolver');
+
+var opts = {
+	configFile : argv.configfile,
+	dist : argv.dist,
+	hostname : argv.hostname,
+	port : argv.port
+};
+
+appResolver = appResolver('urn:d2l:fra:class:copycat', opts);
+
+appResolver.host();
+
+console.log(
+	chalk.green('Hosting local app: ' + appResolver.getConfigUrl() + '\n')
+);
