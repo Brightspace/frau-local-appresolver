@@ -24,13 +24,19 @@ var opts = {
 
 appResolver = appResolver(argv.appclass, opts);
 
-appResolver.host();
-
-console.log(chalk.green('Hosting...\n'));
-
-console.log(
-	chalk.grey( 
-		'   app-class: ' + argv.appclass + '\n' +
-		'   app-config: ' + appResolver.getConfigUrl() + '\n'
-	)
-);
+appResolver.host()
+	.then(function() {
+		console.log(chalk.green('Hosting...\n'));
+		console.log(
+			chalk.grey( 
+				'   app-class: ' + argv.appclass + '\n' +
+				'   app-config: ' + appResolver.getConfigUrl() + '\n'
+			)
+		);
+	}).catch(function(err) {
+		if (err && err.code === 'EADDRINUSE') {
+			console.log(chalk.red('Error: ' + err.code + '. Port is in use.\n'));
+		} else {
+			console.log(chalk.red('Error: ' + err.code + '.\n'));
+		}
+	});
