@@ -1,11 +1,11 @@
 #! /usr/bin/env node
 
 var chalk = require('chalk'),
+	path = require('path'),
 	argv = require('yargs');
 
 argv = argv.usage('Usage: localappresolver --appclass|-c [--configfile|-f] [--hostname|-h] [--port|-p] [--dist|-d]')
 	.example('localappresolver -c urn:d2l:fra:class:some-app -f appconfig.json -h acme.com -p 3000 -d dist')
-	.demand('appclass')
 	.alias('c', 'appclass')
 	.alias('f', 'configfile')
 	.alias('h', 'hostname')
@@ -15,14 +15,22 @@ argv = argv.usage('Usage: localappresolver --appclass|-c [--configfile|-f] [--ho
 
 var appResolver = require('../lib/appresolver');
 
+var fileOpts;
+try {
+	fileOpts = require(path.join(process.cwd(), 'appresolver.json'));
+} catch (err) {
+	fileOpts = {};
+}
+
 var opts = {
-	configFile : argv.configfile,
-	dist : argv.dist,
-	hostname : argv.hostname,
-	port : argv.port
+	appClass : (argv.appclass || fileOpts.appClass ),
+	configFile : (argv.configfile || fileOpts.configFile),
+	dist : (argv.dist || fileOpts.dist),
+	hostname : (argv.hostname || fileOpts.hostname),
+	port : (argv.port || fileOpts.port)
 };
 
-appResolver = appResolver(argv.appclass, opts);
+appResolver = appResolver(opts.appClass, opts);
 
 appResolver.host()
 	.then(function() {
