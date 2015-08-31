@@ -1,7 +1,6 @@
 #! /usr/bin/env node
 
 var chalk = require('chalk'),
-	path = require('path'),
 	argv = require('yargs');
 
 argv = argv.usage('Usage: localappresolver --appclass|-c [--configfile|-f] [--hostname|-h] [--port|-p] [--dist|-d]')
@@ -15,19 +14,12 @@ argv = argv.usage('Usage: localappresolver --appclass|-c [--configfile|-f] [--ho
 
 var appResolver = require('../lib/appresolver');
 
-var fileOpts;
-try {
-	fileOpts = require(path.join(process.cwd(), 'appresolver.json'));
-} catch (err) {
-	fileOpts = {};
-}
-
 var opts = {
-	appClass : (argv.appclass || fileOpts.appClass ),
-	configFile : (argv.configfile || fileOpts.configFile),
-	dist : (argv.dist || fileOpts.dist),
-	hostname : (argv.hostname || fileOpts.hostname),
-	port : (argv.port || fileOpts.port)
+	appClass : (argv.appclass || process.env.npm_package_config_localAppResolver_appClass),
+	configFile : (argv.configfile || process.env.npm_package_config_localAppResolver_configFile),
+	dist : (argv.dist || process.env.npm_package_config_localAppResolver_dist),
+	hostname : (argv.hostname || process.env.npm_package_config_localAppResolver_hostname),
+	port : (argv.port || process.env.npm_package_config_localAppResolver_port)
 };
 
 appResolver = appResolver(opts.appClass, opts);
@@ -37,7 +29,7 @@ appResolver.host()
 		console.log(chalk.green('Hosting...\n'));
 		console.log(
 			chalk.grey( 
-				'   app-class: ' + argv.appclass + '\n' +
+				'   app-class: ' + opts.appClass + '\n' +
 				'   app-config: ' + appResolver.getConfigUrl() + '\n'
 			)
 		);

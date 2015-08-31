@@ -19,14 +19,23 @@ npm install frau-local-appresolver
 ### From CLI
 
 ```javascript
-// simply provide the required appclass
-localappresolver -c urn:d2l:fra:class:some-app
+// provide configuration via config block in package.json (recommended)
+frau-local-appresolver
 
-// alternatively override default options
-localappresolver -c urn:d2l:fra:class:some-app -f appconfig.json -h acme.com -p 3000 -d dist
+"config": { 
+  "localAppResolver": {
+    "appClass": "urn:d2l:fra:class:some-app",
+    ...
+   }
+}
+
+// or provide configuration on the CLI
+frau-local-appresolver -c urn:d2l:fra:class:some-app
+
+frau-local-appresolver -c urn:d2l:fra:class:some-app -f appconfig.json -h acme.com -p 3000 -d dist
 ```
 
-See below for parameter explanation.  Parameters may be provided directly on the CLI, or alternatively can be provided in a `appresolver.json` file.
+See below for parameter explanation.
 
 ### From JavaScript
 
