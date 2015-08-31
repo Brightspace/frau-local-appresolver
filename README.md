@@ -30,9 +30,10 @@ npm install frau-local-appresolver
    }
 }
 
-// or provide configuration on the CLI
+// or provide requried configuration on the CLI
 frau-local-appresolver -c urn:d2l:fra:class:some-app
 
+// or override optional parameters on the CLI 
 frau-local-appresolver -c urn:d2l:fra:class:some-app -f appconfig.json -h acme.com -p 3000 -d dist
 ```
 
