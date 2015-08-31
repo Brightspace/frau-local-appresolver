@@ -15,11 +15,11 @@ argv = argv.usage('Usage: localappresolver --appclass|-c [--configfile|-f] [--ho
 var appResolver = require('../lib/appresolver');
 
 var opts = {
-	appClass : (argv.appclass || process.env.npm_package_config_localAppResolver_appClass),
-	configFile : (argv.configfile || process.env.npm_package_config_localAppResolver_configFile),
-	dist : (argv.dist || process.env.npm_package_config_localAppResolver_dist),
-	hostname : (argv.hostname || process.env.npm_package_config_localAppResolver_hostname),
-	port : (argv.port || process.env.npm_package_config_localAppResolver_port)
+	appClass : (argv.appclass || process.env.npm_package_config_frauLocalAppResolver_appClass),
+	configFile : (argv.configfile || process.env.npm_package_config_frauLocalAppResolver_configFile),
+	dist : (argv.dist || process.env.npm_package_config_frauLocalAppResolver_dist),
+	hostname : (argv.hostname || process.env.npm_package_config_frauLocalAppResolver_hostname),
+	port : (argv.port || process.env.npm_package_config_frauLocalAppResolver_port)
 };
 
 appResolver = appResolver(opts.appClass, opts);

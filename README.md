@@ -20,10 +20,11 @@ npm install frau-local-appresolver
 
 ```javascript
 // provide configuration via config block in package.json (recommended)
-frau-local-appresolver
-
+"scripts": {
+  "resolver": "frau-local-appresolver"
+},
 "config": { 
-  "localAppResolver": {
+  "frauLocalAppResolver": {
     "appClass": "urn:d2l:fra:class:some-app",
     ...
    }
