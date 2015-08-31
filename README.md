@@ -26,7 +26,7 @@ localappresolver -c urn:d2l:fra:class:some-app
 localappresolver -c urn:d2l:fra:class:some-app -f appconfig.json -h acme.com -p 3000 -d dist
 ```
 
-See below for parameter explanation.
+See below for parameter explanation.  Parameters may be provided directly on the CLI, or alternatively can be provided in a `appresolver.json` file.
 
 ### From JavaScript
 
