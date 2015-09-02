@@ -20,6 +20,14 @@ npm install frau-local-appresolver
 
 The FRAU app resolver can be run either directly on the console CLI (assuming dependencies are installed), or specified as a script in `package.json`.
 
+Launching the local app resolver can be as simple as:
+
+```javascript
+frau-local-appresolver --appclass|-c urn:d2l:fra:class:some-app
+```
+
+However additional options (described below) can be configured:
+
 ```javascript
 frau-local-appresolver --appclass|-c urn:d2l:fra:class:some-app 
                        --configfile|-f appconfig.json 
@@ -42,8 +50,6 @@ frau-local-appresolver --appclass|-c urn:d2l:fra:class:some-app
    }
 }
 ```
-
-See below for parameter explanation.
 
 ### From JavaScript
 
