@@ -1,7 +1,7 @@
 var chai = require('chai'),
 	expect = chai.expect;
 
-import {appresolver} from '../lib/index';
+import appresolver from '../lib/index';
 
 describe('index', () => {
 
