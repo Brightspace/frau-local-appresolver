@@ -1,6 +1,6 @@
 {
   "name": "frau-local-appresolver",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "A free-range-app utility for resolving locally hosted apps.",
   "main": "lib/index.js",
   "bin": {
