@@ -1,3 +1,5 @@
+'use strict';
+
 var chai = require('chai'),
 	expect = chai.expect,
 	appresolver = require('../lib/index');
