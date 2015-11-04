@@ -4,6 +4,6 @@ test
 .editorconfig
 .gitattributes
 .gitignore
-.jshintrc
+.eslintrc
 .npmignore
 .travis.yml
