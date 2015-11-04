@@ -1,19 +1,18 @@
 var chai = require('chai'),
-	expect = chai.expect;
+	expect = chai.expect,
+	appresolver = require('../lib/index');
 
-import appresolver from '../lib/index';
+describe('index', function() {
 
-describe('index', () => {
-
-	it('should define appresolver', () => {
+	it('should define appresolver', function() {
 		expect(appresolver).to.be.a('Object');
 	});
 
-	it('should define appresolver', () => {
+	it('should define appresolver', function() {
 		expect(appresolver.resolver).to.be.a('Function');
 	});
 
-	it('should define appresolver', () => {
+	it('should define appresolver', function() {
 		expect(appresolver.optionsProvider).to.be.a('Object');
 	});
 
