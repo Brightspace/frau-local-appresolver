@@ -1,3 +1,5 @@
+'use strict';
+
 var appresolver = require('../lib/appresolver'),
 	corsProxy = require('superagent-d2l-cors-proxy'),
 	request = require('request'),
@@ -30,7 +32,7 @@ describe('appresolver', function() {
 
 		it('hostname', function() {
 			expect(appresolver(APP_CLASS)._opts.hostname)
-				.to.be.equal(require('os').hostname().replace('.local',''));
+				.to.be.equal(require('os').hostname().replace('.local', ''));
 		});
 
 		it('port', function() {
@@ -86,11 +88,11 @@ describe('appresolver', function() {
 			var url = 'http://localhost:' + DEFAULT_PORT + '/resolve/' + encodeURIComponent(APP_CLASS);
 			var expectedUrl = 'http://localhost:' + DEFAULT_PORT + '/app/appconfig.json';
 			request.get(url, function(error, response, body) {
-				if(error) {
+				if (error) {
 					cb(error);
-				} else if ( response.statusCode != 200 ) {
+				} else if ( response.statusCode !== 200 ) {
 					cb(response.statusCode);
-				} else if ( JSON.parse(body).url != expectedUrl ) {
+				} else if ( JSON.parse(body).url !== expectedUrl ) {
 					cb(JSON.parse(body));
 				} else {
 					cb();
@@ -100,10 +102,10 @@ describe('appresolver', function() {
 
 		it('should not serve resolution when trying to resolve app-class that is not being hosted', function(cb) {
 			var url = 'http://localhost:' + DEFAULT_PORT + '/resolve/some-other-app-class';
-			request.get(url, function(error, response, body) {
-				if(error) {
+			request.get(url, function(error, response) {
+				if (error) {
 					cb(error);
-				} else if ( response.statusCode != 404 ) {
+				} else if ( response.statusCode !== 404 ) {
 					cb(response.statusCode);
 				} else {
 					cb();
@@ -114,11 +116,11 @@ describe('appresolver', function() {
 		it('should serve static files', function(cb) {
 			var url = 'http://localhost:' + DEFAULT_PORT + '/app/staticFileToBeServed.txt';
 			request.get(url, function(error, response, body) {
-				if(error) {
+				if (error) {
 					cb(error);
-				} else if ( response.statusCode != 200 ) {
+				} else if ( response.statusCode !== 200 ) {
 					cb(response);
-				} else if ( body != 'some simple contents' ) {
+				} else if ( body !== 'some simple contents' ) {
 					cb(body);
 				} else {
 					cb();
@@ -128,10 +130,10 @@ describe('appresolver', function() {
 
 		it('should serve CORS proxy', function(cb) {
 			var url = 'http://localhost:' + DEFAULT_PORT + corsProxy.getProxyDefaultLocation();
-			request.get(url, function(err, res, body) {
-				if(err)
+			request.get(url, function(err, res) {
+				if (err)
 					return cb(err);
-				if(res.statusCode !== 200)
+				if (res.statusCode !== 200)
 					return cb(res);
 				cb();
 			});
