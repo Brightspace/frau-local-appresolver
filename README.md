@@ -54,7 +54,7 @@ frau-local-appresolver --appclass|-c urn:d2l:fra:class:some-app
 ### From JavaScript
 
 ```javascript
-var appResolver = require('frau-local-appresolver');
+var appResolver = require('frau-local-appresolver').resolver;
 
 // simply provide required appClass
 appResolver = appResolver(appClass);
