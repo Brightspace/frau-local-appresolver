@@ -1,6 +1,6 @@
 'use strict';
 
-var appresolver = require('../lib/appresolver'),
+var appresolver = require('../src/appresolver'),
 	corsProxy = require('superagent-d2l-cors-proxy'),
 	request = require('request'),
 	chai = require('chai');
