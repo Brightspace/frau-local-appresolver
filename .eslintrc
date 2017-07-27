@@ -1,8 +1,5 @@
 {
-  "extends": "brightspace",
-  "env": {
-    "node": true
-  },
+  "extends": "brightspace/node-config",
   "rules": {
     "no-console": 0
   }
