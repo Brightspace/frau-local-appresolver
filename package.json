@@ -29,24 +29,22 @@
   },
   "homepage": "https://github.com/Brightspace/frau-local-appresolver",
   "dependencies": {
-    "chalk": "^1.1.1",
-    "cors": "^2.7.1",
-    "express": "^4.13.3",
-    "q": "^1.4.1",
-    "serve-static": "^1.10.0",
-    "superagent-d2l-cors-proxy": "^0.2.0",
-    "yargs": "^3.29.0"
+    "chalk": "^2.0.1",
+    "cors": "^2.8.4",
+    "express": "^4.15.3",
+    "serve-static": "^1.12.3",
+    "superagent-d2l-cors-proxy": "^0.3.0",
+    "yargs": "^8.0.2"
   },
   "devDependencies": {
-    "chai": "^3.4.0",
-    "coveralls": "^2.11.4",
-    "eslint": "^1.8.0",
-    "eslint-config-brightspace": "0.0.3",
-    "eslint-plugin-react": "^3.6.3",
-    "istanbul": "^0.4.0",
-    "mocha": "^2.3.3",
-    "request": "^2.65.0",
-    "sinon": "^1.17.2",
-    "sinon-chai": "^2.8.0"
+    "chai": "^4.1.0",
+    "coveralls": "^2.13.1",
+    "eslint": "^4.3.0",
+    "eslint-config-brightspace": "0.3.1",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.4.2",
+    "request": "^2.81.0",
+    "sinon": "^2.4.1",
+    "sinon-chai": "^2.12.0"
   }
 }
