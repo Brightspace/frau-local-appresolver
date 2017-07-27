@@ -16,7 +16,7 @@ describe('appresolver', function() {
 
 		it('should have _opts property', function() {
 			expect(appresolver(APP_CLASS)._opts)
-				.to.be.defined;
+				.to.not.be.undefined;
 		});
 
 		it('class', function() {
