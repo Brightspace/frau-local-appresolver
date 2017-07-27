@@ -1,6 +1,5 @@
 language: node_js
-node_js:
-- '0.12'
+node_js: node
 after_success: npm run report-coverage
 deploy:
   provider: npm
