@@ -35,9 +35,6 @@ LocalAppRegistry.prototype.host = function() {
 	var app = require('express')();
 	var cors = require('cors');
 	var serveStatic = require('serve-static');
-	var q = require('q');
-
-	var deferred = q.defer();
 
 	app.use(cors());
 
@@ -55,13 +52,14 @@ LocalAppRegistry.prototype.host = function() {
 		}
 	);
 
-	app.listen(self._opts.port, function() {
-		deferred.resolve();
-	}).on('error', function(err) {
-		deferred.reject(err);
+	return new Promise(function(resolve, reject) {
+		app.listen(self._opts.port, function() {
+			resolve();
+		}).on('error', function(err) {
+			reject(err);
+		});
 	});
 
-	return deferred.promise;
 };
 
 LocalAppRegistry.prototype.getUrl = function() {
