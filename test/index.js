@@ -2,7 +2,7 @@
 
 var chai = require('chai'),
 	expect = chai.expect,
-	appresolver = require('../lib/index');
+	appresolver = require('../src/index');
 
 describe('index', function() {
 

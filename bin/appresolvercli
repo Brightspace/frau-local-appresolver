@@ -2,7 +2,7 @@
 
 var chalk = require('chalk'),
 	argv = require('yargs')
-	optionsProvider = require('../lib/optionsProvider');
+	optionsProvider = require('../src/optionsProvider');
 
 argv = argv.usage('Usage: frau-local-appresolver --appclass|-c [--configfile|-f] [--hostname|-h] [--port|-p] [--dist|-d]')
 	.example('frau-local-appresolver -c urn:d2l:fra:class:some-app -f appconfig.json -h acme.com -p 3000 -d dist')
@@ -13,7 +13,7 @@ argv = argv.usage('Usage: frau-local-appresolver --appclass|-c [--configfile|-f]
 	.alias('d', 'dist')
 	.argv;
 
-var appResolver = require('../lib/appresolver');
+var appResolver = require('../src/appresolver');
 
 var opts = optionsProvider.getOptions(argv);
 
@@ -23,7 +23,7 @@ appResolver.host()
 	.then(function() {
 		console.log(chalk.green('Hosting...\n'));
 		console.log(
-			chalk.grey( 
+			chalk.grey(
 				'   app-class: ' + opts.appClass + '\n' +
 				'   app-config: ' + appResolver.getConfigUrl() + '\n'
 			)
