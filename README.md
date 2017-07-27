@@ -75,7 +75,7 @@ var target = appResolver.getUrl();
 - `options` (optional) - An object containing:
   - `dist` - The directory containing the app files to serve.  By default, the `dist` directory is used.
   - `port` - The port to listen on.  By default, port `3000` is used, which is the port that the LMS expects it on.
-  - `hostname` - The hostname (or IP) to listen on. By default, `localhost` is used.  You should not need to change this.
+  - `hostname` - The hostname (or IP) to listen on. By default, the hostname of the operating system is used.  You should not need to change this.
   - `configFile` - The name of the app config file.  By default, `appconfig.json` is used.  You should not need to change this.
 
 ## Contributing
