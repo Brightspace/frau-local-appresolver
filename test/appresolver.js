@@ -31,8 +31,11 @@ describe('appresolver', function() {
 		});
 
 		it('hostname', function() {
-			expect(appresolver(APP_CLASS)._opts.hostname)
-				.to.be.equal(require('os').hostname().replace('.local', ''));
+			var hostname = appresolver(APP_CLASS)._opts.hostname;
+			expect(hostname)
+				.to.have.string(require('os').hostname().replace('.local', ''));
+			expect(hostname)
+				.to.not.have.string('.local');
 		});
 
 		it('port', function() {
