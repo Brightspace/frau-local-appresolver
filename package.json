@@ -31,6 +31,7 @@
   "dependencies": {
     "chalk": "^2.0.1",
     "cors": "^2.8.4",
+    "deasync": "^0.1.13",
     "express": "^4.15.3",
     "serve-static": "^1.12.3",
     "superagent-d2l-cors-proxy": "^0.3.0",
