@@ -4,14 +4,14 @@ var chalk = require('chalk'),
 	argv = require('yargs')
 	optionsProvider = require('../src/optionsProvider');
 
-argv = argv.usage('Usage: frau-local-appresolver --appclass|-c [--configfile|-f] [--hostname|-h] [--port|-p] [--dist|-d] [--useAppRoute|-u]')
+argv = argv.usage('Usage: frau-local-appresolver --appclass|-c [--configfile|-f] [--hostname|-h] [--port|-p] [--dist|-d] [--baseRoute|-b]')
 	.example('frau-local-appresolver -c urn:d2l:fra:class:some-app -f appconfig.json -h acme.com -p 3000 -d dist')
 	.alias('c', 'appclass')
 	.alias('f', 'configfile')
 	.alias('h', 'hostname')
 	.alias('p', 'port')
 	.alias('d', 'dist')
-	.alias('u', 'useAppRoute')
+	.alias('b', 'baseRoute')
 	.argv;
 
 var appResolver = require('../src/appresolver');

@@ -21,9 +21,9 @@ module.exports = {
 		return argv.port ||
 			process.env.npm_package_config_frauLocalAppResolver_port;
 	},
-	getUseAppRoute: function(argv) {
-		return argv.useAppRoute ||
-			process.env.npm_package_config_frauLocalAppResolver_useAppRoute;
+	getBaseRoute: function(argv) {
+		return argv.baseRoute ||
+			process.env.npm_package_config_frauLocalAppResolver_baseRoute;
 	},
 	getOptions: function(argv) {
 		return {
@@ -32,7 +32,7 @@ module.exports = {
 			dist: this.getDist(argv),
 			hostname: this.getHostname(argv),
 			port: this.getPort(argv),
-			useAppRoute: this.getUseAppRoute(argv)
+			baseRoute: this.getBaseRoute(argv)
 		};
 	}
 };
