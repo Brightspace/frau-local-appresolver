@@ -30,14 +30,6 @@ describe('appresolver', function() {
 			}).to.throw(Error, 'appClass is a required argument for LocalAppResolver.');
 		});
 
-		it('hostname', function() {
-			var hostname = appresolver(APP_CLASS)._opts.hostname;
-			expect(hostname)
-				.to.have.string(require('os').hostname().replace('.local', ''));
-			expect(hostname)
-				.to.not.have.string('.local');
-		});
-
 		it('port', function() {
 			expect(appresolver(APP_CLASS)._opts.port)
 				.to.be.equal(DEFAULT_PORT);
