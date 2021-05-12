@@ -29,24 +29,26 @@ frau-local-appresolver --appclass|-c urn:d2l:fra:class:some-app
 However additional options (described below) can be configured:
 
 ```javascript
-frau-local-appresolver --appclass|-c urn:d2l:fra:class:some-app 
-                       --configfile|-f appconfig.json 
-                       --hostname|-h acme.com 
-                       --port|-p 3000 
+frau-local-appresolver --appclass|-c urn:d2l:fra:class:some-app
+                       --configfile|-f appconfig.json
+                       --hostname|-h acme.com
+                       --port|-p 3000
                        --dist|-d dist
+                       --useAppRoute|-u true
 ```
 
 ```javascript
 "scripts": {
   "resolver": "frau-local-appresolver"
 },
-"config": { 
+"config": {
   "frauLocalAppResolver": {
     "appClass": "urn:d2l:fra:class:some-app",
     "configFile": "appconfig.json",
     "hostname": "acme.com",
     "port": "3000",
-    "dist": "dist"
+    "dist": "dist",
+    "useAppRoute": "true"
    }
 }
 ```
@@ -77,6 +79,7 @@ var target = appResolver.getUrl();
   - `port` - The port to listen on.  By default, port `3000` is used, which is the port that the LMS expects it on.
   - `hostname` - The hostname (or IP) to listen on. By default, the hostname of the operating system is used.  You should not need to change this.
   - `configFile` - The name of the app config file.  By default, `appconfig.json` is used.  You should not need to change this.
+  - `useAppRoute` - Determines whether or not to include `/app/` in urls.  By default, `true` is used.  Setting this to `false` will allow you to use tools such as `es-dev-server` where you want the endpoint hosted at `http://localhost:3000/index.html` instead of `http://localhost:3000/app/index.html`.
 
 ## Contributing
 Contributions are welcome, please submit a pull request!

@@ -21,13 +21,18 @@ module.exports = {
 		return argv.port ||
 			process.env.npm_package_config_frauLocalAppResolver_port;
 	},
+	getUseAppRoute: function(argv) {
+		return argv.useAppRoute ||
+			process.env.npm_package_config_frauLocalAppResolver_useAppRoute;
+	},
 	getOptions: function(argv) {
 		return {
 			appClass: this.getAppClass(argv),
 			configFile: this.getConfigFile(argv),
 			dist: this.getDist(argv),
 			hostname: this.getHostname(argv),
-			port: this.getPort(argv)
+			port: this.getPort(argv),
+			useAppRoute: this.getUseAppRoute(argv)
 		};
 	}
 };

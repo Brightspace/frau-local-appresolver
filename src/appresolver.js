@@ -42,6 +42,7 @@ function LocalAppRegistry(appClass, opts) {
 	opts.port = opts.port || 3000;
 	opts.dist = opts.dist || 'dist';
 	opts.configFile = opts.configFile || 'appconfig.json';
+	opts.useAppRoute = opts.useAppRoute || 'true';
 
 	this._opts = opts;
 }
@@ -80,7 +81,8 @@ LocalAppRegistry.prototype.host = function() {
 };
 
 LocalAppRegistry.prototype.getUrl = function() {
-	return 'http://' + this._opts.hostname + ':' + this._opts.port + '/app/';
+	const appRoute = this._opts.useAppRoute.toLowerCase() === 'true' ? '/app/' : '/';
+	return 'http://' + this._opts.hostname + ':' + this._opts.port + appRoute;
 };
 
 LocalAppRegistry.prototype.getConfigUrl = function() {
