@@ -68,7 +68,7 @@ describe('appresolver', function() {
 		});
 
 		it('should strip ".local" domain from OSX hostname - with baseRoute', function() {
-			expect(appresolver(APP_CLASS, { hostname: 'somehost.local', baseRoute: '/' }).getUrl())
+			expect(appresolver(APP_CLASS, { hostname: 'somehost.local', baseRoute: '' }).getUrl())
 				.to.be.equal('http://somehost:' + DEFAULT_PORT + '/');
 		});
 
@@ -82,7 +82,7 @@ describe('appresolver', function() {
 		});
 
 		it('should return expected url - with baseRoute', function() {
-			expect(appresolver(APP_CLASS, { hostname: 'somehost.com', port: 11111, baseRoute: '/' }).getUrl())
+			expect(appresolver(APP_CLASS, { hostname: 'somehost.com', port: 11111, baseRoute: '' }).getUrl())
 				.to.be.equal('http://somehost.com:11111/');
 		});
 
@@ -96,7 +96,7 @@ describe('appresolver', function() {
 		});
 
 		it('should return expected url - with baseRoute', function() {
-			expect(appresolver(APP_CLASS, { hostname: 'somehost.com', port: 11111, configFile: 'someconf.js', baseRoute: '/' }).getConfigUrl())
+			expect(appresolver(APP_CLASS, { hostname: 'somehost.com', port: 11111, configFile: 'someconf.js', baseRoute: '' }).getConfigUrl())
 				.to.be.equal('http://somehost.com:11111/someconf.js');
 		});
 
