@@ -30,14 +30,6 @@ describe('appresolver', function() {
 			}).to.throw(Error, 'appClass is a required argument for LocalAppResolver.');
 		});
 
-		it('hostname', function() {
-			var hostname = appresolver(APP_CLASS)._opts.hostname;
-			expect(hostname)
-				.to.have.string(require('os').hostname().replace('.local', ''));
-			expect(hostname)
-				.to.not.have.string('.local');
-		});
-
 		it('port', function() {
 			expect(appresolver(APP_CLASS)._opts.port)
 				.to.be.equal(DEFAULT_PORT);
@@ -53,6 +45,11 @@ describe('appresolver', function() {
 				.to.be.equal('appconfig.json');
 		});
 
+		it('baseRoute', function() {
+			expect(appresolver(APP_CLASS)._opts.baseRoute)
+				.to.be.equal('/app');
+		});
+
 	});
 
 	describe('hostname', function() {
@@ -60,6 +57,11 @@ describe('appresolver', function() {
 		it('should strip ".local" domain from OSX hostname', function() {
 			expect(appresolver(APP_CLASS, { hostname: 'somehost.local' }).getUrl())
 				.to.be.equal('http://somehost:' + DEFAULT_PORT + '/app/');
+		});
+
+		it('should strip ".local" domain from OSX hostname - with baseRoute', function() {
+			expect(appresolver(APP_CLASS, { hostname: 'somehost.local', baseRoute: '' }).getUrl())
+				.to.be.equal('http://somehost:' + DEFAULT_PORT + '/');
 		});
 
 	});
@@ -71,6 +73,11 @@ describe('appresolver', function() {
 				.to.be.equal('http://somehost.com:11111/app/');
 		});
 
+		it('should return expected url - with baseRoute', function() {
+			expect(appresolver(APP_CLASS, { hostname: 'somehost.com', port: 11111, baseRoute: '' }).getUrl())
+				.to.be.equal('http://somehost.com:11111/');
+		});
+
 	});
 
 	describe('getConfigUrl', function() {
@@ -78,6 +85,11 @@ describe('appresolver', function() {
 		it('should return expected url', function() {
 			expect(appresolver(APP_CLASS, { hostname: 'somehost.com', port: 11111, configFile: 'someconf.js' }).getConfigUrl())
 				.to.be.equal('http://somehost.com:11111/app/someconf.js');
+		});
+
+		it('should return expected url - with baseRoute', function() {
+			expect(appresolver(APP_CLASS, { hostname: 'somehost.com', port: 11111, configFile: 'someconf.js', baseRoute: '' }).getConfigUrl())
+				.to.be.equal('http://somehost.com:11111/someconf.js');
 		});
 
 	});
