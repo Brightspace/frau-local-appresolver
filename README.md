@@ -34,7 +34,7 @@ frau-local-appresolver --appclass|-c urn:d2l:fra:class:some-app
                        --hostname|-h acme.com
                        --port|-p 3000
                        --dist|-d dist
-                       --baseRoute|-u app/
+                       --baseRoute|-b app/
 ```
 
 ```javascript
