@@ -55,7 +55,7 @@ describe('appresolver', function() {
 
 		it('baseRoute', function() {
 			expect(appresolver(APP_CLASS)._opts.baseRoute)
-				.to.be.equal('/app/');
+				.to.be.equal('/app');
 		});
 
 	});
