@@ -114,9 +114,9 @@ describe('appresolver', function() {
 			request.get(url, function(error, response, body) {
 				if (error) {
 					cb(error);
-				} else if ( response.statusCode !== 200 ) {
+				} else if (response.statusCode !== 200) {
 					cb(response.statusCode);
-				} else if ( JSON.parse(body).url !== expectedUrl ) {
+				} else if (JSON.parse(body).url !== expectedUrl) {
 					cb(JSON.parse(body));
 				} else {
 					cb();
@@ -129,7 +129,7 @@ describe('appresolver', function() {
 			request.get(url, function(error, response) {
 				if (error) {
 					cb(error);
-				} else if ( response.statusCode !== 404 ) {
+				} else if (response.statusCode !== 404) {
 					cb(response.statusCode);
 				} else {
 					cb();
@@ -142,9 +142,9 @@ describe('appresolver', function() {
 			request.get(url, function(error, response, body) {
 				if (error) {
 					cb(error);
-				} else if ( response.statusCode !== 200 ) {
+				} else if (response.statusCode !== 200) {
 					cb(response);
-				} else if ( body !== 'some simple contents' ) {
+				} else if (body !== 'some simple contents') {
 					cb(body);
 				} else {
 					cb();

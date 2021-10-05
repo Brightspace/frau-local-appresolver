@@ -6,14 +6,6 @@ var corsProxy = require('superagent-d2l-cors-proxy'),
 	dns = require('dns'),
 	deasync = require('deasync');
 
-function getHostname(opts) {
-	var hostname = opts.hostname || getFQDN() || os.hostname();
-	if (hostname.indexOf('.local', hostname.length - 6) !== -1) {
-		hostname = hostname.substr(0, hostname.length - 6);
-	}
-	return hostname;
-}
-
 var getFQDN = deasync(function(cb) {
 	var uqdn = os.hostname();
 	dns.lookup(uqdn, { hints: dns.ADDRCONFIG }, function(err, ip) {
@@ -29,6 +21,15 @@ var getFQDN = deasync(function(cb) {
 	});
 });
 
+function getHostname(opts) {
+	console.log('getHostname', opts.hostname);
+	var hostname = opts.hostname || getFQDN() || os.hostname();
+	if (hostname.indexOf('.local', hostname.length - 6) !== -1) {
+		hostname = hostname.substr(0, hostname.length - 6);
+	}
+	return hostname;
+}
+
 function LocalAppRegistry(appClass, opts) {
 
 	if (!appClass) {
@@ -40,7 +41,6 @@ function LocalAppRegistry(appClass, opts) {
 	opts.appClass = appClass;
 	opts.hostname = getHostname(opts);
 	opts.port = opts.port || 3000;
-	opts.publicEndpoint = opts.publicEndpoint;
 	opts.dist = opts.dist || 'dist';
 	opts.configFile = opts.configFile || 'appconfig.json';
 	opts.baseRoute = opts.baseRoute !== undefined ? opts.baseRoute : '/app';
