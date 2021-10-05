@@ -72,13 +72,20 @@ LocalAppRegistry.prototype.host = function() {
 	);
 
 	return new Promise(function(resolve, reject) {
-		app.listen(self._opts.port, function() {
+		self._server = app.listen(self._opts.port, function() {
 			resolve();
-		}).on('error', function(err) {
+		});
+		self._server.on('error', function(err) {
 			reject(err);
 		});
 	});
 
+};
+
+LocalAppRegistry.prototype.close = function() {
+	if (this._server) {
+		this._server.close();
+	}
 };
 
 LocalAppRegistry.prototype.getUrl = function() {

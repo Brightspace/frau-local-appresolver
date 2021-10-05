@@ -105,8 +105,16 @@ describe('appresolver', function() {
 
 	describe('host', function() {
 
-		var resolver = appresolver(APP_CLASS, { dist: 'test/testDist', hostname: 'localhost' });
-		resolver.host();
+		let resolver;
+
+		before(() => {
+			resolver = appresolver(APP_CLASS, { dist: 'test/testDist', hostname: 'localhost' });
+			resolver.host();
+		});
+
+		after(() => {
+			resolver.close();
+		});
 
 		it('should serve resolution', function(cb) {
 			var url = 'http://localhost:' + DEFAULT_PORT + '/resolve/' + encodeURIComponent(APP_CLASS);
