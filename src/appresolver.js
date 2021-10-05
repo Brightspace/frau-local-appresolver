@@ -22,7 +22,6 @@ var getFQDN = deasync(function(cb) {
 });
 
 function getHostname(opts) {
-	console.log('getHostname', opts.hostname);
 	var hostname = opts.hostname || getFQDN() || os.hostname();
 	if (hostname.indexOf('.local', hostname.length - 6) !== -1) {
 		hostname = hostname.substr(0, hostname.length - 6);
