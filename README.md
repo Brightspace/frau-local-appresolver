@@ -22,17 +22,18 @@ The FRAU app resolver can be run either directly on the console CLI (assuming de
 
 Launching the local app resolver can be as simple as:
 
-```javascript
+```sh
 frau-local-appresolver --appclass|-c urn:d2l:fra:class:some-app
 ```
 
 However additional options (described below) can be configured:
 
-```javascript
+```sh
 frau-local-appresolver --appclass|-c urn:d2l:fra:class:some-app
                        --configfile|-f appconfig.json
                        --hostname|-h acme.com
                        --port|-p 3000
+                       --publicEndpoint|-e https://xyz.ngrok.io
                        --dist|-d dist
                        --baseRoute|-b /app
 ```
@@ -47,6 +48,7 @@ frau-local-appresolver --appclass|-c urn:d2l:fra:class:some-app
     "configFile": "appconfig.json",
     "hostname": "acme.com",
     "port": "3000",
+    "publicEndpoint": "https://xyz.ngrok.io",
     "dist": "dist",
     "baseRoute": "/app"
    }
@@ -78,6 +80,7 @@ var target = appResolver.getUrl();
   - `dist` - The directory containing the app files to serve.  By default, the `dist` directory is used.
   - `port` - The port to listen on.  By default, port `3000` is used, which is the port that the LMS expects it on.
   - `hostname` - The hostname (or IP) to listen on. By default, the hostname of the operating system is used.  You should not need to change this.
+  - `publicEndpoint` - If provided overrides the protocol (http) hostname and port for endpoint resolution
   - `configFile` - The name of the app config file.  By default, `appconfig.json` is used.  You should not need to change this.
   - `baseRoute` - Specifies the base route to be included in urls.  By default, `/app` is used.  Setting this to different values (e.g. `''`) will allow you to use tools such as `es-dev-server` where you want the endpoint hosted at `http://localhost:3000/index.html` instead of `http://localhost:3000/app/index.html`.
 

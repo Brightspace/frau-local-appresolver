@@ -94,6 +94,15 @@ describe('appresolver', function() {
 
 	});
 
+	describe('getPublicEndpoint', function() {
+
+		it('should override the resolved url', function() {
+			expect(appresolver(APP_CLASS, { hostname: 'somehost.com', port: 11111, configFile: 'someconf.js', publicEndpoint: 'https://otherhost.com' }).getConfigUrl())
+				.to.be.equal('https://otherhost.com/app/someconf.js');
+		});
+
+	});
+
 	describe('host', function() {
 
 		var resolver = appresolver(APP_CLASS, { dist: 'test/testDist', hostname: 'localhost' });

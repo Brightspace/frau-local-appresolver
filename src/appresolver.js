@@ -40,6 +40,7 @@ function LocalAppRegistry(appClass, opts) {
 	opts.appClass = appClass;
 	opts.hostname = getHostname(opts);
 	opts.port = opts.port || 3000;
+	opts.publicEndpoint = opts.publicEndpoint;
 	opts.dist = opts.dist || 'dist';
 	opts.configFile = opts.configFile || 'appconfig.json';
 	opts.baseRoute = opts.baseRoute !== undefined ? opts.baseRoute : '/app';
@@ -81,7 +82,9 @@ LocalAppRegistry.prototype.host = function() {
 };
 
 LocalAppRegistry.prototype.getUrl = function() {
-	return 'http://' + this._opts.hostname + ':' + this._opts.port + this._opts.baseRoute + '/';
+	var base = this._opts.publicEndpoint ||
+		('http://' + this._opts.hostname + ':' + this._opts.port);
+	return base + this._opts.baseRoute + '/';
 };
 
 LocalAppRegistry.prototype.getConfigUrl = function() {
