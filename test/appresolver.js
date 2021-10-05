@@ -94,10 +94,27 @@ describe('appresolver', function() {
 
 	});
 
+	describe('getPublicEndpoint', function() {
+
+		it('should override the resolved url', function() {
+			expect(appresolver(APP_CLASS, { hostname: 'somehost.com', port: 11111, configFile: 'someconf.js', publicEndpoint: 'https://otherhost.com' }).getConfigUrl())
+				.to.be.equal('https://otherhost.com/app/someconf.js');
+		});
+
+	});
+
 	describe('host', function() {
 
-		var resolver = appresolver(APP_CLASS, { dist: 'test/testDist', hostname: 'localhost' });
-		resolver.host();
+		let resolver;
+
+		before(() => {
+			resolver = appresolver(APP_CLASS, { dist: 'test/testDist', hostname: 'localhost' });
+			resolver.host();
+		});
+
+		after(() => {
+			resolver.close();
+		});
 
 		it('should serve resolution', function(cb) {
 			var url = 'http://localhost:' + DEFAULT_PORT + '/resolve/' + encodeURIComponent(APP_CLASS);
@@ -105,9 +122,9 @@ describe('appresolver', function() {
 			request.get(url, function(error, response, body) {
 				if (error) {
 					cb(error);
-				} else if ( response.statusCode !== 200 ) {
+				} else if (response.statusCode !== 200) {
 					cb(response.statusCode);
-				} else if ( JSON.parse(body).url !== expectedUrl ) {
+				} else if (JSON.parse(body).url !== expectedUrl) {
 					cb(JSON.parse(body));
 				} else {
 					cb();
@@ -120,7 +137,7 @@ describe('appresolver', function() {
 			request.get(url, function(error, response) {
 				if (error) {
 					cb(error);
-				} else if ( response.statusCode !== 404 ) {
+				} else if (response.statusCode !== 404) {
 					cb(response.statusCode);
 				} else {
 					cb();
@@ -133,9 +150,9 @@ describe('appresolver', function() {
 			request.get(url, function(error, response, body) {
 				if (error) {
 					cb(error);
-				} else if ( response.statusCode !== 200 ) {
+				} else if (response.statusCode !== 200) {
 					cb(response);
-				} else if ( body !== 'some simple contents' ) {
+				} else if (body !== 'some simple contents') {
 					cb(body);
 				} else {
 					cb();

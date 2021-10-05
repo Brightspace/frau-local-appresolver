@@ -6,14 +6,6 @@ var corsProxy = require('superagent-d2l-cors-proxy'),
 	dns = require('dns'),
 	deasync = require('deasync');
 
-function getHostname(opts) {
-	var hostname = opts.hostname || getFQDN() || os.hostname();
-	if (hostname.indexOf('.local', hostname.length - 6) !== -1) {
-		hostname = hostname.substr(0, hostname.length - 6);
-	}
-	return hostname;
-}
-
 var getFQDN = deasync(function(cb) {
 	var uqdn = os.hostname();
 	dns.lookup(uqdn, { hints: dns.ADDRCONFIG }, function(err, ip) {
@@ -28,6 +20,14 @@ var getFQDN = deasync(function(cb) {
 		});
 	});
 });
+
+function getHostname(opts) {
+	var hostname = opts.hostname || getFQDN() || os.hostname();
+	if (hostname.indexOf('.local', hostname.length - 6) !== -1) {
+		hostname = hostname.substr(0, hostname.length - 6);
+	}
+	return hostname;
+}
 
 function LocalAppRegistry(appClass, opts) {
 
@@ -71,17 +71,26 @@ LocalAppRegistry.prototype.host = function() {
 	);
 
 	return new Promise(function(resolve, reject) {
-		app.listen(self._opts.port, function() {
+		self._server = app.listen(self._opts.port, function() {
 			resolve();
-		}).on('error', function(err) {
+		});
+		self._server.on('error', function(err) {
 			reject(err);
 		});
 	});
 
 };
 
+LocalAppRegistry.prototype.close = function() {
+	if (this._server) {
+		this._server.close();
+	}
+};
+
 LocalAppRegistry.prototype.getUrl = function() {
-	return 'http://' + this._opts.hostname + ':' + this._opts.port + this._opts.baseRoute + '/';
+	var base = this._opts.publicEndpoint ||
+		('http://' + this._opts.hostname + ':' + this._opts.port);
+	return base + this._opts.baseRoute + '/';
 };
 
 LocalAppRegistry.prototype.getConfigUrl = function() {
