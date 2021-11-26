@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/Brightspace/frau-local-appresolver",
   "dependencies": {
-    "chalk": "^4",
+    "chalk": "^5",
     "cors": "^2",
     "deasync": "^0.1",
     "express": "^4",
