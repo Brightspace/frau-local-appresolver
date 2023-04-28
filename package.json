@@ -41,7 +41,7 @@
   "devDependencies": {
     "chai": "^4",
     "eslint": "^8",
-    "eslint-config-brightspace": "^0.22",
+    "eslint-config-brightspace": "^0.23",
     "mocha": "^10",
     "request": "^2"
   }
