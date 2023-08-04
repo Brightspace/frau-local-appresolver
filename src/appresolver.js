@@ -1,13 +1,13 @@
 'use strict';
 
-var corsProxy = require('superagent-d2l-cors-proxy'),
+const corsProxy = require('superagent-d2l-cors-proxy'),
 	chalk = require('chalk'),
 	os = require('os'),
 	dns = require('dns'),
 	deasync = require('deasync');
 
-var getFQDN = deasync(function(cb) {
-	var uqdn = os.hostname();
+const getFQDN = deasync(function(cb) {
+	const uqdn = os.hostname();
 	dns.lookup(uqdn, { hints: dns.ADDRCONFIG }, function(err, ip) {
 		if (err) {
 			return cb(err);
@@ -22,7 +22,7 @@ var getFQDN = deasync(function(cb) {
 });
 
 function getHostname(opts) {
-	var hostname = opts.hostname || getFQDN() || os.hostname();
+	let hostname = opts.hostname || getFQDN() || os.hostname();
 	if (hostname.indexOf('.local', hostname.length - 6) !== -1) {
 		hostname = hostname.substr(0, hostname.length - 6);
 	}
@@ -49,16 +49,16 @@ function LocalAppRegistry(appClass, opts) {
 
 LocalAppRegistry.prototype.host = function() {
 
-	var self = this;
-	var app = require('express')();
-	var cors = require('cors');
-	var serveStatic = require('serve-static');
+	const self = this;
+	const app = require('express')();
+	const cors = require('cors');
+	const serveStatic = require('serve-static');
 
 	app.use(cors());
 
 	app.use(this._opts.baseRoute, serveStatic(self._opts.dist));
 
-	var encodedAppClass = encodeURIComponent(self._opts.appClass);
+	const encodedAppClass = encodeURIComponent(self._opts.appClass);
 	app.get('/resolve/' + encodedAppClass, function(req, res) {
 		res.json({ url: self.getConfigUrl() });
 	});
@@ -88,7 +88,7 @@ LocalAppRegistry.prototype.close = function() {
 };
 
 LocalAppRegistry.prototype.getUrl = function() {
-	var base = this._opts.publicEndpoint ||
+	const base = this._opts.publicEndpoint ||
 		('http://' + this._opts.hostname + ':' + this._opts.port);
 	return base + this._opts.baseRoute + '/';
 };
