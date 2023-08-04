@@ -1,13 +1,13 @@
 'use strict';
 
-var appresolver = require('../src/appresolver'),
+const appresolver = require('../src/appresolver'),
 	corsProxy = require('superagent-d2l-cors-proxy'),
 	request = require('request'),
 	chai = require('chai');
 
-var expect = chai.expect;
+const expect = chai.expect;
 
-var APP_CLASS = 'urn:d2l:fra:class:some-class',
+const APP_CLASS = 'urn:d2l:fra:class:some-class',
 	DEFAULT_PORT = 3000;
 
 describe('appresolver', function() {
@@ -117,8 +117,8 @@ describe('appresolver', function() {
 		});
 
 		it('should serve resolution', function(cb) {
-			var url = 'http://localhost:' + DEFAULT_PORT + '/resolve/' + encodeURIComponent(APP_CLASS);
-			var expectedUrl = 'http://localhost:' + DEFAULT_PORT + '/app/appconfig.json';
+			const url = 'http://localhost:' + DEFAULT_PORT + '/resolve/' + encodeURIComponent(APP_CLASS);
+			const expectedUrl = 'http://localhost:' + DEFAULT_PORT + '/app/appconfig.json';
 			request.get(url, function(error, response, body) {
 				if (error) {
 					cb(error);
@@ -133,7 +133,7 @@ describe('appresolver', function() {
 		});
 
 		it('should not serve resolution when trying to resolve app-class that is not being hosted', function(cb) {
-			var url = 'http://localhost:' + DEFAULT_PORT + '/resolve/some-other-app-class';
+			const url = 'http://localhost:' + DEFAULT_PORT + '/resolve/some-other-app-class';
 			request.get(url, function(error, response) {
 				if (error) {
 					cb(error);
@@ -146,7 +146,7 @@ describe('appresolver', function() {
 		});
 
 		it('should serve static files', function(cb) {
-			var url = 'http://localhost:' + DEFAULT_PORT + '/app/staticFileToBeServed.txt';
+			const url = 'http://localhost:' + DEFAULT_PORT + '/app/staticFileToBeServed.txt';
 			request.get(url, function(error, response, body) {
 				if (error) {
 					cb(error);
@@ -161,7 +161,7 @@ describe('appresolver', function() {
 		});
 
 		it('should serve CORS proxy', function(cb) {
-			var url = 'http://localhost:' + DEFAULT_PORT + corsProxy.getProxyDefaultLocation();
+			const url = 'http://localhost:' + DEFAULT_PORT + corsProxy.getProxyDefaultLocation();
 			request.get(url, function(err, res) {
 				if (err)
 					return cb(err);
