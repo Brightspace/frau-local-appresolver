@@ -2,5 +2,8 @@
   "extends": "brightspace/node-config",
   "rules": {
     "no-console": 0
+  },
+  "parserOptions": {
+    "sourceType": "script"
   }
 }
