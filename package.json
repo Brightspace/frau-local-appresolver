@@ -39,7 +39,7 @@
     "yargs": "^17"
   },
   "devDependencies": {
-    "chai": "^4",
+    "chai": "^5",
     "eslint": "^8",
     "eslint-config-brightspace": "^1.0",
     "mocha": "^10",
