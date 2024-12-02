@@ -42,7 +42,7 @@
     "chai": "^4",
     "eslint": "^8",
     "eslint-config-brightspace": "^1.0",
-    "mocha": "^10",
+    "mocha": "^11",
     "request": "^2"
   }
 }
