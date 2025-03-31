@@ -33,7 +33,7 @@
     "chalk": "^4",
     "cors": "^2",
     "deasync": "^0.1",
-    "express": "^4",
+    "express": "^5",
     "serve-static": "^2",
     "superagent-d2l-cors-proxy": "^0.3",
     "yargs": "^17"
