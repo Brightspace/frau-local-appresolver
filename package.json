@@ -36,7 +36,7 @@
     "express": "^5",
     "serve-static": "^2",
     "superagent-d2l-cors-proxy": "^0.3",
-    "yargs": "^17"
+    "yargs": "^18"
   },
   "devDependencies": {
     "chai": "^4",
