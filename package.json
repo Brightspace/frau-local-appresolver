@@ -1,6 +1,6 @@
 {
   "name": "frau-local-appresolver",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "A free-range-app utility for resolving locally hosted apps.",
   "main": "src/index.js",
   "bin": {
@@ -39,7 +39,7 @@
     "yargs": "^18"
   },
   "devDependencies": {
-    "chai": "^4",
+    "chai": "^6",
     "eslint": "^9",
     "eslint-config-brightspace": "^2.0",
     "globals": "^16",
