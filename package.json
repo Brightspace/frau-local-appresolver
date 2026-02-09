@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "chai": "^6",
-    "eslint": "^9",
+    "eslint": "^10",
     "eslint-config-brightspace": "^2.0",
     "globals": "^17",
     "mocha": "^11",
