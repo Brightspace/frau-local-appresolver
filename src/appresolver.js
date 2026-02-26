@@ -1,7 +1,6 @@
 'use strict';
 
 const corsProxy = require('superagent-d2l-cors-proxy'),
-	chalk = require('chalk'),
 	os = require('os'),
 	dns = require('dns'),
 	deasync = require('deasync');
