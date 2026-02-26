@@ -32,7 +32,6 @@ function getHostname(opts) {
 function LocalAppRegistry(appClass, opts) {
 
 	if (!appClass) {
-		console.log(chalk.red('As of free-range-app-utils@0.8.0, Use localAppResolver(appClass, options) to specify an appClass when using the local app resolver.\n'));
 		throw new Error('appClass is a required argument for LocalAppResolver.');
 	}
 
