@@ -1,10 +1,11 @@
 #! /usr/bin/env node
 
 var chalk = require('chalk'),
-	argv = require('yargs')
+	yargs = require('yargs')
 	optionsProvider = require('../src/optionsProvider');
 
-argv = argv.usage('Usage: frau-local-appresolver --appclass|-c [--configfile|-f] [--hostname|-h] [--port|-p] [--publicEndpoint|-e] [--dist|-d] [--baseRoute|-b]')
+argv = yargs(process.argv)
+	.usage('Usage: frau-local-appresolver --appclass|-c [--configfile|-f] [--hostname|-h] [--port|-p] [--publicEndpoint|-e] [--dist|-d] [--baseRoute|-b]')
 	.example('frau-local-appresolver -c urn:d2l:fra:class:some-app -f appconfig.json -h acme.com -p 3000 -d dist')
 	.alias('c', 'appclass')
 	.alias('f', 'configfile')
@@ -13,7 +14,7 @@ argv = argv.usage('Usage: frau-local-appresolver --appclass|-c [--configfile|-f]
 	.alias('e', 'publicEndpoint')
 	.alias('d', 'dist')
 	.alias('b', 'baseRoute')
-	.argv;
+	.parse();
 
 var appResolver = require('../src/appresolver');
 
