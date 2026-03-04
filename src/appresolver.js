@@ -1,9 +1,62 @@
 'use strict';
 
-const corsProxy = require('superagent-d2l-cors-proxy'),
-	os = require('os'),
+const os = require('os'),
 	dns = require('dns'),
 	deasync = require('deasync');
+
+const CORS_PROXY_HTML = `
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CORS proxy</title>
+	</head>
+	<body>
+		<script src="https://s.brightspace.com/lib/superagent/1.2.0/superagent.min.js"></script>
+		<script>
+
+			function makeUrlLocal(url) {
+
+				var url = url.replace(/^[a-zA-Z]+:/, '');
+				url = url.replace(/^//[^/]+/, '');
+				url = url.replace(/^//, '');
+
+				var localUrl = window.location.protocol + '//' + window.location.host + '/' + url;
+				return localUrl;
+
+			}
+
+			window.addEventListener('message', function(evt) {
+				var data = JSON.parse(evt.data);
+				var localUrl = makeUrlLocal(data.url);
+				superagent(data.method, localUrl)
+					.query(data.query && data.query.join('&'))
+					.timeout(data.timeout)
+					.send(data.data)
+					.set(data.header)
+					.end(function(err, res) {
+						parent.postMessage(
+							JSON.stringify({
+								id: data.id,
+								err: err,
+								res: res
+							}),
+							'*'
+						);
+					});
+			});
+
+			if(window.parent !== window) {
+				window.parent.postMessage(
+					JSON.stringify({type: 'ready'}),
+					'*'
+				);
+			}
+
+		</script>
+	</body>
+</html>
+`;
+const CORS_PROXY_LOCATION = '/cors-proxy.html';
 
 const getFQDN = deasync(function(cb) {
 	const uqdn = os.hostname();
@@ -62,9 +115,9 @@ LocalAppRegistry.prototype.host = function() {
 	});
 
 	app.get(
-		corsProxy.getProxyDefaultLocation(),
+		CORS_PROXY_LOCATION,
 		function(req, res) {
-			res.sendFile(corsProxy.getProxyFilePath());
+			res.send(CORS_PROXY_HTML);
 		}
 	);
 
@@ -93,6 +146,10 @@ LocalAppRegistry.prototype.getUrl = function() {
 
 LocalAppRegistry.prototype.getConfigUrl = function() {
 	return this.getUrl() + this._opts.configFile;
+};
+
+LocalAppRegistry.prototype._getProxyDefaultLocation = function() {
+	return CORS_PROXY_LOCATION;
 };
 
 module.exports = function(appClass, opts) {

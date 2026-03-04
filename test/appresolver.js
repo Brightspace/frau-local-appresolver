@@ -1,7 +1,6 @@
 'use strict';
 
 const appresolver = require('../src/appresolver'),
-	corsProxy = require('superagent-d2l-cors-proxy'),
 	request = require('request'),
 	chai = require('chai');
 
@@ -161,7 +160,7 @@ describe('appresolver', function() {
 		});
 
 		it('should serve CORS proxy', function(cb) {
-			const url = 'http://localhost:' + DEFAULT_PORT + corsProxy.getProxyDefaultLocation();
+			const url = `http://localhost:${DEFAULT_PORT}${resolver._getProxyDefaultLocation()}`;
 			request.get(url, function(err, res) {
 				if (err)
 					return cb(err);
