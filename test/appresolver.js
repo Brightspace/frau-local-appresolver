@@ -1,7 +1,6 @@
 'use strict';
 
 const appresolver = require('../src/appresolver'),
-	request = require('request'),
 	chai = require('chai');
 
 const expect = chai.expect;
@@ -118,13 +117,12 @@ describe('appresolver', function() {
 		it('should serve resolution', function(cb) {
 			const url = 'http://localhost:' + DEFAULT_PORT + '/resolve/' + encodeURIComponent(APP_CLASS);
 			const expectedUrl = 'http://localhost:' + DEFAULT_PORT + '/app/appconfig.json';
-			request.get(url, function(error, response, body) {
-				if (error) {
-					cb(error);
-				} else if (response.statusCode !== 200) {
-					cb(response.statusCode);
-				} else if (JSON.parse(body).url !== expectedUrl) {
-					cb(JSON.parse(body));
+			fetch(url).then(res => {
+				if (!res.ok) return cb(res.status);
+				return res.json();
+			}).then(json => {
+				if (json.url !== expectedUrl) {
+					cb(json);
 				} else {
 					cb();
 				}
@@ -133,11 +131,9 @@ describe('appresolver', function() {
 
 		it('should not serve resolution when trying to resolve app-class that is not being hosted', function(cb) {
 			const url = 'http://localhost:' + DEFAULT_PORT + '/resolve/some-other-app-class';
-			request.get(url, function(error, response) {
-				if (error) {
-					cb(error);
-				} else if (response.statusCode !== 404) {
-					cb(response.statusCode);
+			fetch(url).then(res => {
+				if (res.status !== 404) {
+					cb(res.status);
 				} else {
 					cb();
 				}
@@ -146,12 +142,11 @@ describe('appresolver', function() {
 
 		it('should serve static files', function(cb) {
 			const url = 'http://localhost:' + DEFAULT_PORT + '/app/staticFileToBeServed.txt';
-			request.get(url, function(error, response, body) {
-				if (error) {
-					cb(error);
-				} else if (response.statusCode !== 200) {
-					cb(response);
-				} else if (body !== 'some simple contents') {
+			fetch(url).then(res => {
+				if (!res.ok) return cb(res.status);
+				return res.text();
+			}).then(body => {
+				if (body !== 'some simple contents') {
 					cb(body);
 				} else {
 					cb();
@@ -161,12 +156,12 @@ describe('appresolver', function() {
 
 		it('should serve CORS proxy', function(cb) {
 			const url = `http://localhost:${DEFAULT_PORT}${resolver._getProxyDefaultLocation()}`;
-			request.get(url, function(err, res) {
-				if (err)
-					return cb(err);
-				if (res.statusCode !== 200)
-					return cb(res);
-				cb();
+			fetch(url).then(res => {
+				if (!res.ok) {
+					return cb(res.status);
+				} else {
+					cb();
+				}
 			});
 		});
 
