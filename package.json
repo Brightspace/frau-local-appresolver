@@ -29,6 +29,9 @@
     "url": "https://github.com/Brightspace/frau-local-appresolver/issues"
   },
   "homepage": "https://github.com/Brightspace/frau-local-appresolver",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "dependencies": {
     "chalk": "^4",
     "cors": "^2",
