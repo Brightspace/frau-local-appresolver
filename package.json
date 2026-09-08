@@ -45,6 +45,6 @@
     "eslint": "^9",
     "eslint-config-brightspace": "^4",
     "globals": "^17",
-    "mocha": "^11"
+    "mocha": "^12"
   }
 }
